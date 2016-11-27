@@ -8,7 +8,7 @@ import subprocess
 import random
 import signal
 import os
-import MEMES.py
+import MEMES
 
 message_list = sys.argv[1:]
 length_of_input =  sum(len(x) + 1 for x in message_list)
