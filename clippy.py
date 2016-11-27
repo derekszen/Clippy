@@ -7,6 +7,7 @@ import math
 import subprocess
 import random
 import signal
+import os
 
 message_list = sys.argv[1:]
 length_of_input =  sum(len(x) + 1 for x in message_list)
@@ -73,6 +74,9 @@ first_box = r"""
 
 
 def process_Command(command):
+    if (command.find("cd") != -1):
+        result = os.chdir(command[1])
+        return result 
     command_List = command.split()
     print(command_List)
     result = subprocess.call(command_List, shell = True)
@@ -161,7 +165,7 @@ def TRIGGERED(signal, frame):
 
 def main():
     #Welcome message 
-    print_Clippy("Hello, my name is clippy, everyone's favorite personal assistant!")
+    print_Clippy("Hello, I'm Clippy, everyone's favorite personal assistant!")
     while 1:
         command = raw_input(">")
         process_Command(command)
