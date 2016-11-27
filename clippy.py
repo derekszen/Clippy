@@ -8,6 +8,7 @@ import subprocess
 import random
 import signal
 import os
+import MEMES.py
 
 message_list = sys.argv[1:]
 length_of_input =  sum(len(x) + 1 for x in message_list)
@@ -34,33 +35,6 @@ end_box = r"""
 /
 """
 
-angry_clippy = r"""
-                    _.-;:q=._
-                  .' j=""^k;:\.
-                 ; .F       ";`Y
-                ,;.J_        ;'j
-              ,-;"^7F       : .F           _________________
-             ,-'-_<.        ;gj. _.,---""''               .'
-            ;  _,._`\.     : `T"5,                       ;
-            : `?8w7 `J  ,-'" -^q. `                     ; Y O U 
-             \;._ _,=' ;   n58L Y.                     .' 
-               F;";  .' k_ `^'  j'                     ;  H A V E 
-               J;:: ;     "y:-='                      ;
-                L;;==      |:;   jT\                  ;  B E E N 
-                L;:;J      J:L  7:;'       _         ;  
-                I;|:.L     |:k J:.' ,  '       .     ;  W A R N E D
-                |;J:.|     ;.I F.:      .           :
-               ;J;:L::     |.| |.J  , '   `    ;    ;    
-             .' J:`J.`.    :.J |. L .    ;         ;
-            ;    L :k:`._ ,',j J; |  ` ,        ; ;  
-          .'     I :`=.:."_".'  L J             `.'  DO NOT TRY TO EXIT AGAIN
-        .'       |.:  `"-=-'    |.J              ;
-    _.-'         `: :           ;:;           _ ;
-_.-'"             J: :         /.;'       ;    ;
-='_ k;.. _.;:Y' , .' "---..__Y;."-=';:=' , .' ""
-
-"""
-
 first_box = r"""
 
      /
@@ -71,12 +45,18 @@ first_box = r"""
      |
      \_
 """
+# NAUGHTY NAUGHTY.
+restrictedCommands = ["reboot", "shutdown", "fuck", "suck", "you", "rm"]
 
 
 def process_Command(command):
     if (command.find("cd") != -1):
         result = os.chdir(command[1])
-        return result 
+        return result
+    for restrictedCommand in restrictedCommands:
+        if (command.find(restrictedCommand) != -1):
+            print(angry_clippy)
+            return 1
     command_List = command.split()
     print(command_List)
     result = subprocess.call(command_List, shell = True)
@@ -160,7 +140,7 @@ def trigger_warning(signal, frame):
 
 def TRIGGERED(signal, frame):
     global nope
-    print(nope)
+    print(nope[random.randint(0,len(nope)-1)])
     return 
 
 def main():
